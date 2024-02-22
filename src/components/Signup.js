@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
   const navigate = useNavigate();
-  const BASE_URL = "http://localhost:5000";
+  const BASE_URL = "mongodb+srv://afifurrahman444:afif2017@cluster0.nmr1num.mongodb.net/MERNAppData?retryWrites=true&w=majority";
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     _id: new mongoose.Types.ObjectId(),
