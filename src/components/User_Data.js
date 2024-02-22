@@ -43,9 +43,9 @@ function UserData() {
     }
 
     try {
+      setLoader(true)
       const API_LINK = `${BASE_URL}/userdata?page=${page}&dataCount=${userData.dataCount}`;
       const token = localStorage.getItem("token");
-      console.log(userId);
       const response = await fetch(API_LINK, {
         method: "GET",
         headers: {
@@ -57,6 +57,7 @@ function UserData() {
       const result = await response.json();
       setUsers(result.users);
       setUserData({ ...userData, page: page, totalPages: result.totalPages });
+      setLoader(false)
     } catch (error) {
       console.error(`Error Fetching the data from ${db}: ${error}`);
     }
