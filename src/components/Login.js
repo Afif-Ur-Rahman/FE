@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate();
-  const BASE_URL = "mongodb+srv://afifurrahman444:afif2017@cluster0.nmr1num.mongodb.net/MERNAppData?retryWrites=true&w=majority";
+  const BASE_URL = "https://mern-app-crud-backend.vercel.app";
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
