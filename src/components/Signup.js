@@ -77,7 +77,6 @@ function Signup() {
 
       if (result.ok) {
         const data = await result.json();
-        console.log(data);
         if (data.success) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("User Name", formData.name);

@@ -74,7 +74,6 @@ function Login() {
 
       if (result.ok) {
         const data = await result.json();
-        console.log(data);
         if (data.success) {
           localStorage.setItem("token", data.token);
           localStorage.setItem("User Name", data.name);
@@ -83,9 +82,7 @@ function Login() {
         } else {
           console.error(data.message);
         }
-        console.log(data.message);
       } else {
-        console.log(result.statusText);
         setIsError(true);
       }
     } catch (error) {

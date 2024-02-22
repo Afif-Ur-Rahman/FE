@@ -213,8 +213,6 @@ function UserData() {
   // Delete One Request
   const DeleteOneUser = async (id) => {
     setLoader(true);
-    // const updatedUsers = users.filter((user) => user._id !== id);
-    // setUsers(updatedUsers);
     const API_LINK = `${BASE_URL}/deleteOne`;
     try {
       await fetch(API_LINK, {
