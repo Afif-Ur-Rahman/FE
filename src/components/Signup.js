@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 function Signup() {
   const navigate = useNavigate();
   const BASE_URL = "https://mern-app-crud-backend.vercel.app";
+  // const BASE_URL = "http://localhost:5000";
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -73,6 +74,7 @@ function Signup() {
         },
         body: JSON.stringify(formData),
       });
+      console.log(result);
 
       if (result.ok) {
         const data = await result.json();
@@ -85,13 +87,12 @@ function Signup() {
           console.error(data.message);
         }
       } else {
-        setIsError(true)
         setEmailExist(true)
       }
     } catch (error) {
       console.error(error);
     } finally {
-      setIsError(false);
+      // setIsError(false);
       setLoader(false);
     }
   };
@@ -185,7 +186,19 @@ function Signup() {
                     fontWeight: "500",
                   }}
                 >
-                  {emailExist ? "Email Already Registered" : "Please Enter valid Email Address"}
+                  Please Enter valid Email Address
+                </span>
+              )}
+
+              {emailExist && (
+                <span
+                  style={{
+                    fontSize: "14px",
+                    color: "rgba(255, 0, 0, 0.8)",
+                    fontWeight: "500",
+                  }}
+                >
+                  Email Already Registered
                 </span>
               )}
               <br />
