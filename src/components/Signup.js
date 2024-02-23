@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Loader from "./Loader";
-import mongoose from "mongoose";
 import { Link, useNavigate } from "react-router-dom";
 
 function Signup() {
@@ -10,7 +9,6 @@ function Signup() {
   const BASE_URL = "https://mern-app-crud-backend.vercel.app";
   const [loader, setLoader] = useState(false);
   const [formData, setFormData] = useState({
-    _id: new mongoose.Types.ObjectId(),
     name: "",
     email: "",
     password: "",
