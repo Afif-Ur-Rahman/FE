@@ -10,7 +10,8 @@ import { useNavigate } from "react-router-dom";
 
 function UserData() {
   const BASE_URL = "https://mern-app-crud-backend.vercel.app";
-  const db = "mongodb+srv://afifurrahman444:afif2017@cluster0.nmr1num.mongodb.net/MERNAppData?retryWrites=true&w=majority";
+  const db =
+    "mongodb+srv://afifurrahman444:afif2017@cluster0.nmr1num.mongodb.net/MERNAppData?retryWrites=true&w=majority";
   const [users, setUsers] = useState([]);
   const [alert, setAlert] = useState(null);
   const [newId, setNewId] = useState(null);
@@ -43,7 +44,7 @@ function UserData() {
     }
 
     try {
-      setLoader(true)
+      setLoader(true);
       const API_LINK = `${BASE_URL}/userdata?page=${page}&dataCount=${userData.dataCount}`;
       const token = localStorage.getItem("token");
       const response = await fetch(API_LINK, {
@@ -57,7 +58,7 @@ function UserData() {
       const result = await response.json();
       setUsers(result.users);
       setUserData({ ...userData, page: page, totalPages: result.totalPages });
-      setLoader(false)
+      setLoader(false);
     } catch (error) {
       console.error(`Error Fetching the data from ${db}: ${error}`);
     }
@@ -485,7 +486,11 @@ function UserData() {
                 <button
                   type="submit"
                   className="btn btn-danger mx-1"
-                  onClick={() => setAddData(false)}
+                  onClick={() => {
+                    setFormData({ name: "", email: "", password: "" });
+                    setButton(true);
+                    setAddData(false);
+                  }}
                 >
                   Cancel
                 </button>
@@ -496,7 +501,7 @@ function UserData() {
       )}
 
       <div className="container main">
-      {loader && <Loader />}
+        {loader && <Loader />}
         <div>
           <span style={{ fontWeight: "bold" }}>Logged In as: </span>{" "}
           <span>{localStorage.getItem("User Name")}</span>
@@ -509,7 +514,11 @@ function UserData() {
         <div className="logout">
           <div
             className="form-group my-1"
-            style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
           >
             <label htmlFor="name">Number of Enteries: </label>
             <input

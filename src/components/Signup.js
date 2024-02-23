@@ -16,6 +16,7 @@ function Signup() {
     password: "",
   });
   const [isError, setIsError] = useState(false);
+  const [emailExist, setEmailExist] = useState(false)
 
   const handleInputChange = (e) => {
     setFormData({
@@ -86,7 +87,8 @@ function Signup() {
           console.error(data.message);
         }
       } else {
-        console.error(result.statusText);
+        setIsError(true)
+        setEmailExist(true)
       }
     } catch (error) {
       console.error(error);
@@ -185,7 +187,7 @@ function Signup() {
                     fontWeight: "500",
                   }}
                 >
-                  Please Enter valid Email Address{" "}
+                  {emailExist ? "Email Already Registered" : "Please Enter valid Email Address"}
                 </span>
               )}
               <br />
