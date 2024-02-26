@@ -25,7 +25,6 @@ function UserData() {
     email: "",
     password: "",
   });
-  const [isError, setIsError] = useState(false);
   const [userData, setUserData] = useState({
     page: 1,
     dataCount: 5,
@@ -86,35 +85,6 @@ function UserData() {
     }, 1500);
   };
 
-  // Form Validation
-  // Email Validation
-  const validateEmail = (email) => {
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailPattern.test(email);
-  };
-
-  // Password Validation
-  const validatePassword = (password) => {
-    const passwordPattern =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
-    const isValid = passwordPattern.test(password);
-    const up = /[A-Z]/.test(password);
-    const num = /\d/.test(password);
-    const char = /[@$!%*?&#]/.test(password);
-    const len = password.length >= 8;
-    return { isValid, up, num, char, len };
-  };
-
-  const validName = isError && formData.name.length < 3;
-  const validEmail = isError && !validateEmail(formData.email);
-  const pass =
-    validatePassword(formData.password).isValid &&
-    validatePassword(formData.password).up &&
-    validatePassword(formData.password).num &&
-    validatePassword(formData.password).char &&
-    validatePassword(formData.password).len;
-
-  const validPass = isError && !pass;
   // Get Request
   const GetUsers = async () => {
     try {
@@ -144,11 +114,6 @@ function UserData() {
   const PostUsers = async (e) => {
     setLoader(true);
     e.preventDefault();
-    if (formData.name.length < 4 || !validateEmail(formData.email) || !pass) {
-      setIsError(true);
-      setLoader(false);
-      return;
-    }
 
     const payload = {
       _id: new mongoose.Types.ObjectId(),
@@ -175,7 +140,6 @@ function UserData() {
       });
       showAlert(`Saved Successfully`, "success");
       setFormData({ name: "", email: "", password: "" });
-      setIsError(false);
       setLoader(false);
       setAddData(false);
     } catch (error) {
@@ -257,12 +221,6 @@ function UserData() {
     e.preventDefault();
     setLoader(true);
 
-    if (formData.name.length < 3 || !validateEmail(formData.email) || !pass) {
-      setIsError(true);
-      setLoader(false);
-      return;
-    }
-
     // Updating Data Locally
     const updatedUser = users.map((user) =>
       user._id === newId
@@ -295,7 +253,6 @@ function UserData() {
       setFormData({ name: "", email: "", password: "" });
       setNewId(null);
       setButton(true);
-      setIsError(false);
       setLoader(false);
       setAddData(false);
     } catch (error) {
@@ -338,30 +295,10 @@ function UserData() {
                   aria-describedby="name"
                   placeholder="Enter Name"
                   autoComplete="off"
-                  required
-                  style={{
-                    border: `2px solid  ${
-                      validName
-                        ? "rgba(255, 0, 0, 0.8)"
-                        : formData.name.length < 3
-                        ? "rgba(0, 0, 0, 0.2)"
-                        : "green"
-                    }`,
-                  }}
                   value={formData.name}
                   onChange={handleInputChange}
                 />
-                {validName && (
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      color: "rgba(255, 0, 0, 0.8)",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Please Enter valid name{" "}
-                  </span>
-                )}
+
                 <br />
                 <label htmlFor="email">
                   <span style={{ color: "red" }}>*</span>Email address:
@@ -373,30 +310,9 @@ function UserData() {
                   aria-describedby="emailHelp"
                   placeholder="example@gmail.com"
                   autoComplete="off"
-                  required
-                  style={{
-                    border: `2px solid  ${
-                      validEmail
-                        ? "rgba(255, 0, 0, 0.8)"
-                        : !validateEmail(formData.email)
-                        ? "rgba(0, 0, 0, 0.2)"
-                        : "green"
-                    }`,
-                  }}
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-                {validEmail && (
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      color: "rgba(255, 0, 0, 0.8)",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Please Enter valid Email Address{" "}
-                  </span>
-                )}
                 <br />
                 <label htmlFor="password">
                   <span style={{ color: "red" }}>*</span>Password:
@@ -407,74 +323,13 @@ function UserData() {
                   id="password"
                   placeholder="Password"
                   autoComplete="off"
-                  required
-                  style={{
-                    border: `2px solid  ${
-                      validPass
-                        ? "rgba(255, 0, 0, 0.8)"
-                        : !pass
-                        ? "rgba(0, 0, 0, 0.2)"
-                        : "green"
-                    }`,
-                  }}
                   value={formData.password}
                   onChange={handleInputChange}
                 />
 
-                {validPass && (
-                  <span
-                    style={{
-                      fontSize: "14px",
-                      color: "rgba(255, 0, 0, 0.8)",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Please Enter valid Password{" "}
-                  </span>
-                )}
                 <br />
-                <div style={{ fontSize: "14px" }}>
-                  <span>Must contain:</span>
-                  <ul style={{ padding: "0 0 0 20px" }}>
-                    <li
-                      style={{
-                        color: validatePassword(formData.password).up
-                          ? "green"
-                          : "#212529",
-                      }}
-                    >
-                      1 Uppercase Letter
-                    </li>
-                    <li
-                      style={{
-                        color: validatePassword(formData.password).num
-                          ? "green"
-                          : "#212529",
-                      }}
-                    >
-                      1 Number
-                    </li>
-                    <li
-                      style={{
-                        color: validatePassword(formData.password).char
-                          ? "green"
-                          : "#212529",
-                      }}
-                    >
-                      1 Special character(@ $ ! % * ? & #)
-                    </li>
-                    <li
-                      style={{
-                        color: validatePassword(formData.password).len
-                          ? "green"
-                          : "#212529",
-                      }}
-                    >
-                      Minimum 08 characters
-                    </li>
-                  </ul>
-                </div>
               </div>
+              
               <div>
                 <button
                   disabled={loader}
