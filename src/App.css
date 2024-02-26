@@ -26,6 +26,36 @@ body {
   left: 40%;
 }
 
+.download {
+  display: flex;
+  margin: 5px 0 5px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: rgba(273, 273, 273, 0.3); */
+}
+
+.download a {
+  font-weight: bold;
+  text-decoration: none !important;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  display: inline;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradientAnimation 1s linear infinite;
+}
+
+@keyframes gradientAnimation {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+
 .d-flex {
   height: 100vh;
 }
