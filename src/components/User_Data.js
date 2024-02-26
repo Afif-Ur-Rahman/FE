@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import Alerts from "./Alerts";
 import "../App.css";
@@ -34,7 +35,6 @@ function UserData() {
 
   useEffect(() => {
     GetUsers();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userData.dataCount]);
 
   const handlePaginationClick = async (page) => {
@@ -184,7 +184,7 @@ function UserData() {
   };
 
   // Delete All Request
-  const DeleteAllUsers = async () => {
+  const DeleteAllUsers = async (id) => {
     setLoader(true);
     setUsers([]);
     const API_LINK = `${BASE_URL}/deleteAll`;
@@ -194,6 +194,7 @@ function UserData() {
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({id}),
       });
       const result = await response.json();
       setUsers([]);
@@ -628,7 +629,7 @@ function UserData() {
                           <button
                             className="btn btn-danger mt-2 mx-1"
                             onClick={() =>
-                              newId ? DeleteOneUser(newId) : DeleteAllUsers()
+                              newId ? DeleteOneUser(newId) : DeleteAllUsers(localStorage.getItem("User Id"))
                             }
                           >
                             Yes

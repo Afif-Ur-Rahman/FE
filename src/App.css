@@ -73,9 +73,10 @@ body {
 }
 
 .delOne {
-  position: fixed;
+  position: absolute;
+  width: 280px;
   top: 40%;
-  right: 40.6%;
+  left: 40%;
   border: 1px solid grey;
   border-radius: 10px;
   padding: 10px;
@@ -113,6 +114,11 @@ body {
 }
 
 @media screen and (max-width: 1024px) {
+
+  .delOne {
+    left: 37%;
+  }
+
   .data {
     position: absolute;
     top: 0%;
@@ -121,6 +127,11 @@ body {
 }
 
 @media screen and (max-width: 820px) {
+
+  .delOne {
+    left: 35%;
+  }
+
   .data {
     position: absolute;
     top: -18%;
@@ -135,6 +146,11 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+
+  .delOne {
+    left: 30%;
+  }
+
   .data {
     position: absolute;
     top: 6%;
@@ -153,6 +169,11 @@ body {
 }
 
 @media screen and (max-width: 540px) {
+
+  .delOne {
+    left: 23%;
+  }
+
   .data {
     position: absolute;
     top: 0%;
@@ -171,6 +192,11 @@ body {
 }
 
 @media screen and (max-width: 430px) {
+
+  .delOne {
+    left: 14%;
+  }
+
   .data {
     position: absolute;
     top: 0%;
@@ -229,6 +255,11 @@ body {
 }
 
 @media screen and (max-width: 375px) {
+
+  .delOne {
+    left: 11%;
+  }
+
   .data {
     position: absolute;
     top: 0%;
@@ -261,6 +292,12 @@ body {
 }
 
 @media screen and (max-width: 280px) {
+
+  .delOne {
+    width: 200px;
+    left: 10%;
+  }
+
   .data {
     position: absolute;
     top: 0%;
